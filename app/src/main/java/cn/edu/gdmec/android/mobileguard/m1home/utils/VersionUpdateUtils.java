@@ -33,29 +33,21 @@ public class VersionUpdateUtils {
 
     private String mVersion;
     private Activity context;
-    private ProgressDialog mProgressDialog;
     private VersionEntity versionEntity;
 
-    private static final int MESSAGE_NET_EEOR=101;
-    private static final int MESSAGE_IO_EEOR=102;
-    private static final int MESSAGE_JSON_EEOR=103;
+    private static final int MESSAGE_IO_ERROR=102;
+    private static final int MESSAGE_JSON_ERROR=103;
     private static final int MESSAGE_SHOEW_DIALOG=104;
     private static final int MESSAGE_ENTERHOME=105;
 
     private Handler handler=new Handler() {
         public void handleMessage(android.os.Message msg){
             switch (msg.what){
-                case MESSAGE_IO_EEOR:
-                    Toast.makeText(context, "IO异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
+                case MESSAGE_IO_ERROR:
+                    Toast.makeText(context, "IO错误", Toast.LENGTH_LONG).show();
                     break;
-                case MESSAGE_JSON_EEOR:
-                    Toast.makeText(context, "JSON解析异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
-                    break;
-                case MESSAGE_NET_EEOR:
-                    Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
-                    enterHome();
+                case MESSAGE_JSON_ERROR:
+                    Toast.makeText(context, "JSON解析错误", Toast.LENGTH_LONG).show();
                     break;
                 case MESSAGE_SHOEW_DIALOG:
                     showUpdateDialog(versionEntity);
@@ -87,24 +79,24 @@ public class VersionUpdateUtils {
                 JSONObject jsonObject=new JSONObject(result);
 
                 versionEntity=new VersionEntity();
-                versionEntity.versioncode=jsonObject.getString("code");
+                versionEntity.versionCode=jsonObject.getString("code");
                 versionEntity.description=jsonObject.getString("des");
                 versionEntity.apkurl=jsonObject.getString("apkurl");
-                if(!mVersion.equals(versionEntity.versioncode)){
+                if(!mVersion.equals(versionEntity.versionCode)){
                    handler.sendEmptyMessage(MESSAGE_SHOEW_DIALOG);
                 }
             }
         } catch (IOException e) {
-            handler.sendEmptyMessage(MESSAGE_IO_EEOR);
+            handler.sendEmptyMessage(MESSAGE_IO_ERROR);
             e.printStackTrace();
         } catch (JSONException e) {
-            handler.sendEmptyMessage(MESSAGE_JSON_EEOR);
+            handler.sendEmptyMessage(MESSAGE_JSON_ERROR);
             e.printStackTrace();
         }
     }
     private void showUpdateDialog(final VersionEntity versionEntity){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle("检查到新版本："+versionEntity.versioncode);
+        builder.setTitle("检查到新版本："+versionEntity.versionCode);
         builder.setMessage(versionEntity.description);
 
         builder.setCancelable(false);
@@ -125,13 +117,6 @@ public class VersionUpdateUtils {
         });
         builder.show();
     }
-    private void initProgressDialog(){
-        mProgressDialog=new ProgressDialog(context);
-        mProgressDialog.setMessage("准备下载...");
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.show();
-    }
-
 
     private void enterHome(){
         handler.sendEmptyMessageDelayed(MESSAGE_ENTERHOME,2000);
