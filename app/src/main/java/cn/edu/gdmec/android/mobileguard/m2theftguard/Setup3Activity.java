@@ -6,7 +6,7 @@ import android.widget.RadioButton;
 
 import cn.edu.gdmec.android.mobileguard.R;
 
-public class Setup3Activity extends BaseSetupActivity {
+public class Setup3Activity extends BaseSetupActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
