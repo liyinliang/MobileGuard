@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard.utils;
 
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -29,7 +30,7 @@ public class ContactInfoParser {
                 ContactInfo info = new ContactInfo();
                 info.id = id;
 
-                Cursor dataCursor = resolver.query(datauri, new String[]{"data1", "mimetype"}, "raw_contact_id=?", new String[]{id}, null);
+                Cursor dataCursor = resolver.query(datauri, new String[]{"data1", "mimetype"}, "raw_contact_id=?", new String[]{ id }, null);
                 while (dataCursor.moveToNext()) {
                     String data1 = dataCursor.getString(0);
                     String mimetype = dataCursor.getString(1);

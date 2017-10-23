@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,9 +36,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
                     }
                     break;
             }
-        }
-
-        ;
+        };
     };
 
     @Override
@@ -52,6 +51,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
         ImageView mLeftImgv = (ImageView) findViewById(R.id.imgv_leftbtn);
         mLeftImgv.setOnClickListener(this);
         mLeftImgv.setImageResource(R.drawable.back);
+
         findViewById(R.id.rl_titlebar).setBackgroundColor(
                 getResources().getColor(R.color.purple));
         mListView = (ListView) findViewById(R.id.lv_contact);
@@ -60,9 +60,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
                 systemContacts = ContactInfoParser.getSystemContact(ContactSelectActivity.this);
                 systemContacts.addAll(ContactInfoParser.getSimContacts(ContactSelectActivity.this));
                 mHandler.sendEmptyMessage(10);
-            }
-
-            ;
+            };
         }.start();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,10 +80,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
         switch (view.getId()) {
             case R.id.imgv_leftbtn:
                 finish();
-
                 break;
         }
     }
-
-
 }

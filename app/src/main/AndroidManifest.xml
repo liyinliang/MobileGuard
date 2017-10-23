@@ -32,13 +32,15 @@
         <activity android:name=".m2theftguard.Setup4Activity" />
 
         <receiver
-            android:name=".m2theftguard.receiver.BootCompleteRecevier"
+            android:name=".m2theftguard.receiver.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".m2theftguard.ContactSelectActivity"></activity>
     </application>
 
 </manifest>

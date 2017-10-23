@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard.adapter;
 
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
