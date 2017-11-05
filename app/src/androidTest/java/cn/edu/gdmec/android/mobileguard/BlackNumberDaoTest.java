@@ -18,6 +18,7 @@ import java.util.Random;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.entity.BlackContactInfo;
 
+
 /**
  * Created by LYL on 2017/11/4.
  */
