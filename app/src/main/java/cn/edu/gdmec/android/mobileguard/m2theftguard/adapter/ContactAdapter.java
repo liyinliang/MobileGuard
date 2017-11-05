@@ -49,18 +49,23 @@ public class ContactAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.mNameTV = (TextView) view.findViewById(R.id.tv_name);
             holder.mPhoneTV = (TextView) view.findViewById(R.id.tv_phone);
+            holder.mContactImgv=view.findViewById(R.id.view1);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         holder.mNameTV.setText(contactInfos.get(i).name);
         holder.mPhoneTV.setText(contactInfos.get(i).phone);
+        holder.mNameTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
+        holder.mPhoneTV.setTextColor(context.getResources().getColor(R.color.bright_purple));
+        holder.mContactImgv.setBackgroundResource(R.drawable.brightpurple_contact_icon);
         return view;
     }
 
     static class ViewHolder {
         TextView mNameTV;
         TextView mPhoneTV;
+        View mContactImgv;
     }
 }
 
