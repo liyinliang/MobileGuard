@@ -26,6 +26,15 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
     private EditText mTypeET;
     private BlackNumberDao dao;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_add_black_number);
+        dao=new BlackNumberDao(AddBlackNumberActivity.this);
+        initView();
+    }
+
     private void initView(){
         findViewById(R.id.rl_titlebar).setBackgroundColor(getResources().getColor(R.color.bright_purple));
         ((TextView) findViewById(R.id.tv_title)).setText("添加黑名单");
@@ -52,15 +61,6 @@ public class AddBlackNumberActivity extends AppCompatActivity implements View.On
             mNumET.setText(phone);
             mTypeET.setText(type);
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_add_black_number);
-        dao=new BlackNumberDao(AddBlackNumberActivity.this);
-        initView();
     }
 
     @Override

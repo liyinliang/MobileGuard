@@ -32,6 +32,14 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
     private List<BlackContactInfo> pageBlackNumber=new ArrayList<BlackContactInfo>();
     private BlackContactAdapter adapter;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_security_phone);
+        initView();
+        fillData();
+    }
     private void fillData(){
         dao=new BlackNumberDao(SecurityPhoneActivity.this);
         totalNumber=dao.getTotalNumber();
@@ -96,16 +104,6 @@ public class SecurityPhoneActivity extends AppCompatActivity implements View.OnC
 
             }
         });
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_security_phone);
-        initView();
-        fillData();
     }
 
     @Override
