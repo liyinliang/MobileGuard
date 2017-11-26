@@ -15,6 +15,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+    //m6缓存权限
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
 
     <application
         android:name=".App"
@@ -24,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity" >
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -98,9 +101,12 @@
         </receiver>
 
         <activity android:name=".m4appmanager.AppManagerActivity"/>
-        <activity android:name=".m5virusscan.VirusScanSpeedActivity">
+        <activity android:name=".m5virusscan.VirusScanSpeedActivity"/>
+        <activity android:name=".m5virusscan.VirusScanActivity"/>
+
+        <activity android:name=".m6cleancache.CacheClearListActivity">
         </activity>
-        <activity android:name=".m5virusscan.VirusScanActivity">
+        <activity android:name=".m6cleancache.CleanCacheActivity">
         </activity>
     </application>
 
