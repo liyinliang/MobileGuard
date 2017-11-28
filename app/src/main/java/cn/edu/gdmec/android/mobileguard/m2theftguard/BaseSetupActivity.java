@@ -32,7 +32,6 @@ public abstract class BaseSetupActivity extends AppCompatActivity{
         startActivity(intent);
         finish();
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
