@@ -46,7 +46,6 @@ public abstract class BaseSetupActivity extends AppCompatActivity{
                             "无效动作，移动太慢",Toast.LENGTH_SHORT).show();
                     return true;
                 }
-
                 if((e2.getRawX()-e1.getRawX())>200){
                     showPre();
                     overridePendingTransition(R.anim.pre_in,
