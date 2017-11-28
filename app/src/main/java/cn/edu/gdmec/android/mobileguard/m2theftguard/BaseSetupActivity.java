@@ -36,7 +36,6 @@ public abstract class BaseSetupActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         sp = getSharedPreferences("config",MODE_PRIVATE);
 
         mGestureDetector=new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
