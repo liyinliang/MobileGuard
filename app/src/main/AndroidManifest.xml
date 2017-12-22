@@ -110,8 +110,7 @@
         <activity android:name=".m5virusscan.VirusScanActivity" />
         <activity android:name=".m6cleancache.CacheClearListActivity" />
         <activity android:name=".m6cleancache.CleanCacheActivity" />
-        <activity android:name=".m7processmanager.ProcessManagerActivity" />
-        <activity android:name=".m7processmanager.ProcessManagerSettingActivity" />
+
 
         <service
             android:name=".m8trafficmonitor.service.TrafficMonitoringService"
