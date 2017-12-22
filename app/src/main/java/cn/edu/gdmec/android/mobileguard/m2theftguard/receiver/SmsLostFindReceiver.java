@@ -15,7 +15,7 @@ import android.util.Log;
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.service.GPSLocationService;
 
-public class SmsLostFindReceiver extends BroadcastReceiver {
+public class SmsLostFindReceiver extends BroadcastReceiver{
     private static final String TAG = SmsLostFindReceiver.class.getSimpleName();
     private SharedPreferences sharedPreferences;
     private ComponentName componentName;
@@ -35,8 +35,6 @@ public class SmsLostFindReceiver extends BroadcastReceiver {
                 String body = smsMessage.getMessageBody();
                 String safephone = sharedPreferences.getString("safephone",null);
                 if(!TextUtils.isEmpty(safephone) & sender.equals(safephone)){
-
-
                     if("#*location*#".equals(body)){
                         Log.i(TAG,"返回位置信息.");
                         Intent service = new Intent(context, GPSLocationService.class);

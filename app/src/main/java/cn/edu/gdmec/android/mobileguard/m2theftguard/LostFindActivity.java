@@ -1,6 +1,5 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,7 @@ import android.widget.ToggleButton;
 
 import cn.edu.gdmec.android.mobileguard.R;
 
-public class LostFindActivity extends AppCompatActivity implements View.OnClickListener {
+public class LostFindActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView mSafePhoneTV;
     private RelativeLayout mInterSetupRL;
     private SharedPreferences msharedPreferences;

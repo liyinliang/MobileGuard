@@ -1,7 +1,6 @@
 package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -11,13 +10,8 @@ import android.widget.ToggleButton;
 import cn.edu.gdmec.android.mobileguard.R;
 
 public class Setup4Activity extends BaseSetupActivity {
-
     private TextView mStatusTV;
     private ToggleButton mToggleButton;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +48,8 @@ public class Setup4Activity extends BaseSetupActivity {
         }
     }
 
-
-
     @Override
-    public void showNext() {
+    public void showNext(){
         SharedPreferences.Editor editor=sp.edit();
         editor.putBoolean("isSetUp",true);
         editor.commit();
