@@ -21,30 +21,30 @@ import java.lang.reflect.Method;
 import cn.edu.gdmec.android.mobileguard.m3communicationguard.db.dao.BlackNumberDao;
 
 /**
- * Created by LYL on 2017/11/4.
+ * Created by Administrator on 2017/11/1 0001.
  */
 
-public class InterceptCallReciever extends BroadcastReceiver{
+public class InterceptCallReciever extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences mSP=context.getSharedPreferences("config",Context.MODE_PRIVATE);
-        boolean BlackNumStatus=mSP.getBoolean("BlackNumStatus",true);
-        if (!BlackNumStatus){
+        SharedPreferences mSP = context.getSharedPreferences("config",Context.MODE_PRIVATE);
+        boolean BlackNumStatus = mSP.getBoolean("BlackNumStatus",true);
+        if(!BlackNumStatus){
             return;
         }
-        BlackNumberDao dao=new BlackNumberDao(context);
-        if (!intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)){
-            String mIncomingNumber="";
-            TelephonyManager tManager=(TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
+        BlackNumberDao dao = new BlackNumberDao(context);
+        if(!intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)){
+            String mIncomingNumber = "";
+            TelephonyManager tManager = (TelephonyManager) context.getSystemService(Service.TELEPHONY_SERVICE);
             switch (tManager.getCallState()){
                 case TelephonyManager.CALL_STATE_RINGING:
-                    mIncomingNumber=intent.getStringExtra("incoming_number");
-                    /*if (mIncomingNumber==null){
+                    mIncomingNumber = intent.getStringExtra("incoming_number");
+                    if(mIncomingNumber == null){
                         return;
-                    }*/
-                    int blackContactMode=dao.getBlackContactMode(mIncomingNumber);
-                    if (blackContactMode==1||blackContactMode==3){
-                        Uri uri=Uri.parse("content://call_log/calls");
+                    }
+                    int blackContactMode = dao.getBlackContactMode(mIncomingNumber);
+                    if(blackContactMode == 1 || blackContactMode == 3){
+                        Uri uri = Uri.parse("content://call_log/calls");
                         context.getContentResolver().registerContentObserver(uri,true,new CallLogObserver(new Handler(),mIncomingNumber,context));
                         endCall(context);
                     }
@@ -52,17 +52,18 @@ public class InterceptCallReciever extends BroadcastReceiver{
             }
         }
     }
-    private class CallLogObserver extends ContentObserver{
+    private class CallLogObserver extends ContentObserver {
         private String incomingNumber;
         private Context context;
 
         public CallLogObserver(Handler handler,String incomingNumber,Context context){
             super(handler);
-            this.incomingNumber=incomingNumber;
-            this.context=context;
+            this.incomingNumber = incomingNumber;
+            this.context = context;
         }
+
         @Override
-        public void onChange(boolean selfChange){
+        public void onChange(boolean selfChange) {
             Log.i("CallLogObserver","呼叫记录数据库的内容变化了。");
             context.getContentResolver().unregisterContentObserver(this);
             deleteCallLog(incomingNumber,context);
@@ -70,22 +71,22 @@ public class InterceptCallReciever extends BroadcastReceiver{
         }
     }
     public void deleteCallLog(String incomingNumber,Context context){
-        ContentResolver resolver=context.getContentResolver();
-        Uri uri=Uri.parse("content://call_log/calls");
-        Cursor cursor=resolver.query(uri,new String[]{"_id"},"number=?",new String[]{incomingNumber},"_id desc limit 1");
-        if (cursor.moveToNext()){
-            String id =cursor.getString(0);
-            resolver.delete(uri,"_id=?",new String[]{id});
+        ContentResolver resolver = context.getContentResolver();
+        Uri uri = Uri.parse("content://call_log/calls");
+        Cursor cursor = resolver.query(uri,new String[] { "_id" },"number=?",new String[] { incomingNumber },"_id desc limit 1");
+        if(cursor.moveToNext()){
+            String id = cursor.getString(0);
+            resolver.delete(uri,"_id=?",new String[] { id });
         }
     }
     public void endCall(Context context){
-        try {
-            Class clazz=context.getClassLoader().loadClass("android.os.ServiceManager");
-            Method method=clazz.getDeclaredMethod("getService",String.class);
-            IBinder iBinder=(IBinder) method.invoke(null,Context.TELEPHONY_SERVICE);
-            ITelephony iTelephony=ITelephony.Stub.asInterface(iBinder);
-            iTelephony.endCall();
-        } catch (Exception e) {
+        try{
+            Class clazz = context.getClassLoader().loadClass("android.os.ServiceManager");
+            Method method = clazz.getDeclaredMethod("getService",String.class);
+            IBinder iBinder = (IBinder) method.invoke(null,Context.TELEPHONY_SERVICE);
+            ITelephony itelephony = ITelephony.Stub.asInterface(iBinder);
+            itelephony.endCall();
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
