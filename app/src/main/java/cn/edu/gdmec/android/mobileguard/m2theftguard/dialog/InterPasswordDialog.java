@@ -2,7 +2,6 @@ package cn.edu.gdmec.android.mobileguard.m2theftguard.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -13,11 +12,7 @@ import android.widget.TextView;
 
 import cn.edu.gdmec.android.mobileguard.R;
 
-/**
- * Created by LYL on 2017/9/27.
- */
-
-public class InterPasswordDialog extends Dialog implements View.OnClickListener {
+public class InterPasswordDialog extends Dialog implements View.OnClickListener{
     private TextView mTitleTV;
     private EditText mInterET;
     private Button mOKBtn;
@@ -25,27 +20,22 @@ public class InterPasswordDialog extends Dialog implements View.OnClickListener 
     private MyCallBack myCallBack;
     private Context context;
 
+    public InterPasswordDialog(@NonNull Context context) {
+        super(context, R.style.dialog_custom);
+        this.context=context;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState){
         setContentView(R.layout.inter_password_dialog);
         super.onCreate(savedInstanceState);
         initView();
     }
-
-    public InterPasswordDialog(@NonNull Context context) {
-        super(context, R.style.dialog_custom);
-        this.context=context;
-    }
-
     private void initView(){
-        mTitleTV=(TextView) findViewById(R.id.tv_interpwd_title);
-        mInterET=(EditText) findViewById(R.id.et_inter_password);
-        mOKBtn=(Button) findViewById(R.id.btn_comfirm);
-        mCancleBtn=(Button) findViewById(R.id.btn_dismiss);
-        mOKBtn.setOnClickListener(this);
-        mCancleBtn.setOnClickListener(this);
+        mTitleTV = (TextView) findViewById(R.id.tv_interpwd_title);
+        mInterET = (EditText) findViewById(R.id.et_inter_password);
+        findViewById(R.id.btn_comfirm).setOnClickListener(this);
+        findViewById(R.id.btn_dismiss).setOnClickListener(this);
     }
-
     public void setTitle(String title){
         if(!TextUtils.isEmpty(title)){
             mTitleTV.setText(title);
@@ -53,25 +43,25 @@ public class InterPasswordDialog extends Dialog implements View.OnClickListener 
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.btn_comfirm:
-                myCallBack.confiem();
+                myCallBack.confirm();
                 break;
             case R.id.btn_dismiss:
-                myCallBack.cancel();
+                myCallBack.cancle();
                 break;
         }
     }
     public String getPassword(){
         return mInterET.getText().toString();
     }
+
     public void setCallBack(MyCallBack myCallBack){
         this.myCallBack=myCallBack;
     }
-
     public interface MyCallBack{
-        void confiem();
-        void cancel();
+        void confirm();
+        void cancle();
     }
 }
